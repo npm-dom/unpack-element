@@ -1,0 +1,31 @@
+{
+  "name": "unpack-element",
+  "version": "0.0.1",
+  "description": "unpack an element's children based on their id",
+  "keywords": [],
+  "author": "Raynos <raynos2@gmail.com>",
+  "repository": "git://github.com/Raynos/unpack-element.git",
+  "main": "index",
+  "homepage": "https://github.com/Raynos/unpack-element",
+  "contributors": [
+    {
+      "name": "Jake Verbaten"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Raynos/unpack-element/issues",
+    "email": "raynos2@gmail.com"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/Raynos/unpack-element/raw/master/LICENSE"
+    }
+  ],
+  "scripts": {
+  }
+}
