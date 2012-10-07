@@ -1,6 +1,6 @@
 {
   "name": "unpack-element",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "unpack an element's children based on their id",
   "keywords": [],
   "author": "Raynos <raynos2@gmail.com>",
