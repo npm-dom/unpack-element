@@ -17,7 +17,8 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
-    "dom-walk": "0.0.1"
+    "dom-walk": "0.0.1",
+    "for-each": "~0.1.0"
   },
   "devDependencies": {},
   "licenses": [
