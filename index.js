@@ -1,5 +1,5 @@
 var walk = require("dom-walk")
-    , forEach = require("for-each")
+var DataSet = require("data-set")
 
 module.exports = unpack
 
@@ -13,20 +13,22 @@ function unpack(elem, mapping) {
     }
 
     if (mapping) {
-        forEach(mapping, findElement)
+        Object.keys(mapping).forEach(findElement)
     }
 
     return struct
 
     function findChildren(node) {
-        if (node.id) {
-            var id = node.id
-            node.removeAttribute("id")
-            struct[id] = node
+        var ds = DataSet(node)
+        var marker = ds.marker
+
+        if (marker) {
+            struct[marker] = node
         }
     }
 
-    function findElement(className, key) {
+    function findElement(key) {
+        var className = mapping[key]
         var children = elem.getElementsByClassName(className)
         struct[key] = children[0]
     }

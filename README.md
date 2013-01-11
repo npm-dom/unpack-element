@@ -1,18 +1,16 @@
 # unpack-element
 
-unpack an element's children based on their id
+unpack an element's children based on markers
 
 ## Example
 
-Take a dom element and unpack it into it's children based on their ids
-
-The ids are removed so you avoid naming collisions at the global level.
+Take a dom element and unpack it into it's children based on their markers
 
 ```html
 <div>
-    <ul id="list">
+    <ul data-marker="list">
     </ul>
-    <span id="foo"></span>
+    <span data-marker="foo"></span>
 </div>
 ```
 
@@ -24,16 +22,6 @@ elements.root // that div
 elements.list // that ul
 elements.foo // that span
 ```
-
-unpack removes the id attributes from the child nodes. This is useful if your
-template generates a dom element with common ids in it and you want to have
-access to those "named" children inside your template without having global
-id's in your DOM.
-
-You don't want those IDs in your document anyway since generally
-
- - it's bad to use ids for CSS selection
- - you can use `<a name="identifier></a>` if you want fragment identifiers.
 
 ## Example with class mapping
 
