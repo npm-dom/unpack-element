@@ -1,4 +1,5 @@
 var walk = require("dom-walk")
+var dotty = require("dotty")
 var DataSet = require("data-set")
 
 module.exports = unpack
@@ -23,7 +24,7 @@ function unpack(elem, mapping) {
         var marker = ds.marker
 
         if (marker) {
-            struct[marker] = node
+            dotty.put(struct, marker, node)
         }
     }
 

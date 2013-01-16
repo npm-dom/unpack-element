@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "dom-walk": "0.0.1",
-    "for-each": "~0.1.0"
+    "for-each": "~0.1.0",
+    "dotty": "0.0.1"
   },
   "devDependencies": {},
   "licenses": [
