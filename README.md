@@ -2,7 +2,8 @@
 
 [![browser support][5]][6]
 
-[![build status][1]][2] [![NPM version][7]][8] [![dependency status][3]][4]
+<!-- [![build status][1]][2]  -->
+[![NPM version][7]][8] [![dependency status][3]][4]
 
 unpack an element's children based on markers
 

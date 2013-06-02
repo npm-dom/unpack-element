@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "dotty": "~0.0.2",
-    "data-set": "~0.1.1"
+    "data-set": "~0.2.2"
   },
   "devDependencies": {
     "tape": "~1.0.2",
