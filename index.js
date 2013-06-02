@@ -1,13 +1,14 @@
-var walk = require("dom-walk")
 var dotty = require("dotty")
 var DataSet = require("data-set")
+
+var slice = Array.prototype.slice
 
 module.exports = unpack
 
 function unpack(elem, mapping) {
     var struct = {}
 
-    walk([elem], findChildren)
+    getChildMarkers(elem)
 
     if (!struct.root) {
         struct.root = elem
@@ -19,13 +20,21 @@ function unpack(elem, mapping) {
 
     return struct
 
-    function findChildren(node) {
-        var ds = DataSet(node)
-        var marker = ds.marker
+    function getChildMarkers(elem) {
+        var children = slice.call(elem.children)
 
-        if (marker) {
-            dotty.put(struct, marker, node)
-        }
+        children.forEach(function (child) {
+            var ds = DataSet(child)
+            var marker = ds.marker
+            var rootMarker = ds.rootmarker
+
+            if (marker) {
+                dotty.put(struct, marker, child)
+                getChildMarkers(child)
+            } else if (rootMarker) {
+                dotty.put(struct, rootMarker, child)
+            }
+        })
     }
 
     function findElement(key) {

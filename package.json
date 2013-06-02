@@ -2,7 +2,12 @@
   "name": "unpack-element",
   "version": "1.0.3",
   "description": "unpack an element's children based on their id",
-  "keywords": [],
+  "keywords": [
+    "unpack",
+    "dom",
+    "template",
+    "element"
+  ],
   "author": "Raynos <raynos2@gmail.com>",
   "repository": "git://github.com/Raynos/unpack-element.git",
   "main": "index",
@@ -17,17 +22,36 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
-    "dom-walk": "0.0.1",
-    "for-each": "~0.1.0",
-    "dotty": "0.0.1",
+    "dotty": "~0.0.2",
     "data-set": "~0.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "tape": "~1.0.2",
+    "jsonml-stringify": "~0.1.8"
+  },
   "licenses": [
     {
       "type": "MIT",
       "url": "http://github.com/Raynos/unpack-element/raw/master/LICENSE"
     }
   ],
-  "scripts": {}
+  "scripts": {
+    "test": "node ./test/index.js"
+  },
+  "testling": {
+    "files": "test/index.js",
+    "browsers": [
+      "ie/8..latest",
+      "firefox/16..latest",
+      "firefox/nightly",
+      "chrome/22..latest",
+      "chrome/canary",
+      "opera/12..latest",
+      "opera/next",
+      "safari/5.1..latest",
+      "ipad/6.0..latest",
+      "iphone/6.0..latest",
+      "android-browser/4.2..latest"
+    ]
+  }
 }
