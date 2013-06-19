@@ -105,3 +105,19 @@ test("unpack with class mapping", function (assert) {
 
     assert.end()
 })
+
+test("nested traversal", function (assert) {
+    var tmpl = dom(["div", [
+        ["div", [
+            ["div", { "data-marker": "foo" }]
+        ]]
+    ]])
+
+    var elements = unpack(tmpl)
+
+    assert.equal(elements.root, tmpl)
+    assert.equal(elements.foo.tagName, "DIV")
+    assert.equal(Object.keys(elements).length, 2)
+
+    assert.end()
+})

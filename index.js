@@ -33,6 +33,8 @@ function unpack(elem, mapping) {
                 getChildMarkers(child)
             } else if (rootMarker) {
                 dotty.put(struct, rootMarker, child)
+            } else {
+                getChildMarkers(child)
             }
         })
     }
