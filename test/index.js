@@ -121,3 +121,21 @@ test("nested traversal", function (assert) {
 
     assert.end()
 })
+
+test("unpack with array syntax", function (assert) {
+    var tmpl = dom(["div", [
+        ["button.foo", { "data-marker": "buttons[]" }],
+        ["button.bar", { "data-marker": "buttons[]" }]
+    ]])
+
+    var elements = unpack(tmpl)
+
+    assert.equal(elements.root, tmpl)
+    assert.equal(Array.isArray(elements.buttons), true)
+    assert.equal(elements.buttons[0].className, "foo")
+    assert.equal(elements.buttons[1].className, "bar")
+    assert.equal(elements.buttons.length, 2)
+    assert.equal(Object.keys(elements).length, 2)
+
+    assert.end()
+})

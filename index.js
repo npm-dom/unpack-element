@@ -1,6 +1,7 @@
 var dotty = require("dotty")
 var DataSet = require("data-set")
 
+var isArray = /\[\]$/
 var slice = Array.prototype.slice
 
 module.exports = unpack
@@ -29,10 +30,20 @@ function unpack(elem, mapping) {
             var rootMarker = ds.rootmarker
 
             if (marker) {
-                dotty.put(struct, marker, child)
+                if (isArray.test(marker)) {
+                    marker = marker.slice(0, -2)
+                    join(struct, marker, [child])
+                } else {
+                    dotty.put(struct, marker, child)
+                }
                 getChildMarkers(child)
             } else if (rootMarker) {
-                dotty.put(struct, rootMarker, child)
+                if (isArray.test(rootMarker)) {
+                    rootMarker = rootMarker.slice(0, -2)
+                    join(struct, rootMarker, [child])
+                } else {
+                    dotty.put(struct, rootMarker, child)
+                }
             } else {
                 getChildMarkers(child)
             }
@@ -44,4 +55,13 @@ function unpack(elem, mapping) {
         var children = elem.getElementsByClassName(className)
         struct[key] = children[0]
     }
+}
+
+function join(obj, key, value) {
+    var existing = dotty.get(obj, key)
+    if (Array.isArray(existing)) {
+        value = existing.concat(value)
+    }
+
+    dotty.put(obj, key, value)
 }
