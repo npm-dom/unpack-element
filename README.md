@@ -108,6 +108,28 @@ This style of using `data-rootmarker` allows you to unpack
     an entirely pre-rendered tree of templates and sub
     templates without having to worry about name collisions
 
+## Example with array syntax
+
+```html
+<div>
+    <button class="foo" data-marker="buttons[]"></button>
+    <button class="bar" data-marker="buttons[]"></button>
+</div>
+```
+
+```js
+var unpack = require("unpack-element")
+
+var elements = unpack(thatDiv)
+
+elements.buttons // [button.foo, button.bar]
+```
+
+You can use `[]` syntax to mark that element as being part of
+    an array. This means that the property on the return object
+    will always be an array even if there is only one element
+    with the `buttons[]` data-marker
+
 ## Example with class mapping
 
 ```html
