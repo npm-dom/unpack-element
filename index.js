@@ -9,7 +9,7 @@ module.exports = unpack
 function unpack(elem, mapping) {
     var struct = {}
 
-    getMarkers(struct, elem)
+    getMarkers(struct, elem, true)
 
     if (!struct.root) {
         struct.root = elem
@@ -28,7 +28,7 @@ function unpack(elem, mapping) {
     }
 }
 
-function getMarkers(struct, elem) {
+function getMarkers(struct, elem, isTop) {
     var ds = DataSet(elem)
     var marker = ds.marker
     var rootMarker = ds.rootmarker
@@ -48,6 +48,10 @@ function getMarkers(struct, elem) {
             join(struct, rootMarker, [elem])
         } else {
             dotty.put(struct, rootMarker, elem)
+        }
+
+        if (isTop) {
+            getChildMarkers(struct, elem)
         }
     } else {
         getChildMarkers(struct, elem)
