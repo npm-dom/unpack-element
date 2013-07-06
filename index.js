@@ -9,7 +9,7 @@ module.exports = unpack
 function unpack(elem, mapping) {
     var struct = {}
 
-    getChildMarkers(elem)
+    getMarkers(struct, elem)
 
     if (!struct.root) {
         struct.root = elem
@@ -21,40 +21,45 @@ function unpack(elem, mapping) {
 
     return struct
 
-    function getChildMarkers(elem) {
-        var children = slice.call(elem.children)
-
-        children.forEach(function (child) {
-            var ds = DataSet(child)
-            var marker = ds.marker
-            var rootMarker = ds.rootmarker
-
-            if (marker) {
-                if (isArray.test(marker)) {
-                    marker = marker.slice(0, -2)
-                    join(struct, marker, [child])
-                } else {
-                    dotty.put(struct, marker, child)
-                }
-                getChildMarkers(child)
-            } else if (rootMarker) {
-                if (isArray.test(rootMarker)) {
-                    rootMarker = rootMarker.slice(0, -2)
-                    join(struct, rootMarker, [child])
-                } else {
-                    dotty.put(struct, rootMarker, child)
-                }
-            } else {
-                getChildMarkers(child)
-            }
-        })
-    }
-
     function findElement(key) {
         var className = mapping[key]
         var children = elem.getElementsByClassName(className)
         struct[key] = children[0]
     }
+}
+
+function getMarkers(struct, elem) {
+    var ds = DataSet(elem)
+    var marker = ds.marker
+    var rootMarker = ds.rootmarker
+
+    if (marker) {
+        if (isArray.test(marker)) {
+            marker = marker.slice(0, -2)
+            join(struct, marker, [elem])
+        } else {
+            dotty.put(struct, marker, elem)
+        }
+
+        getChildMarkers(struct, elem)
+    } else if (rootMarker) {
+        if (isArray.test(rootMarker)) {
+            rootMarker = rootMarker.slice(0, -2)
+            join(struct, rootMarker, [elem])
+        } else {
+            dotty.put(struct, rootMarker, elem)
+        }
+    } else {
+        getChildMarkers(struct, elem)
+    }
+}
+
+function getChildMarkers(struct, parent) {
+    var children = slice.call(parent.children)
+
+    children.forEach(function (child) {
+        getMarkers(struct, child)
+    })
 }
 
 function join(obj, key, value) {
