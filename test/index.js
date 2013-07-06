@@ -77,12 +77,12 @@ test("unpack nested templates with sub paths", function (assert) {
     var listItem1 = unpack(elements.listItems[1])
     assert.equal(listItem1.root, elements.listItems[1])
     assert.equal(listItem1.remove.tagName, "BUTTON")
-    assert.equal(Object.keys(listItem1).length, 3)
+    assert.equal(Object.keys(listItem1).length, 2)
 
     var listItem2 = unpack(elements.listItems[2])
     assert.equal(listItem2.root, elements.listItems[2])
     assert.equal(listItem2.remove.tagName, "BUTTON")
-    assert.equal(Object.keys(listItem2).length, 3)
+    assert.equal(Object.keys(listItem2).length, 2)
 
     assert.end()
 })
